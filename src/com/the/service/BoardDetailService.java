@@ -18,7 +18,11 @@ public class BoardDetailService implements BoardService {
 		long no = Long.parseLong(_no);
 		BoardDto result = boardDao.detail(no);
 		
-		return null;
+		//detail이라는 이름으로 정보 저장
+		request.setAttribute("detail", result);
+		
+		//페이지 이동...
+		return "/WEB-INF/views/board/detail.jsp";
 	}
 
 }

@@ -31,15 +31,37 @@ public class BoardDao {
 		//삽입한 data의 row 수를 리턴해준다.
 		int result = sqlSession.insert("boardMapper.save", boardDto);
 		
-		sqlSession.commit();
+		sqlSession.commit(); //db변경 시 커밋 필수
 		sqlSession.close();
 		
 		return 0;
 	}
 
 	public BoardDto detail(long no) {
+		//select(커밋 필요 없음)
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		//mapper에 넘겨주는 인자(파라미터 변수에 입력되는 데이터)는 한개로 넘겨주세요.
+		BoardDto result = sqlSession.selectOne("boardMapper.detail", no);
 		
-		return null;
+		sqlSession.update("boardMapper.count", no);
+		sqlSession.commit();
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	public void delete(long no) {
+		SqlSession sqlSession = sqlSessionFactory.openSession(true); 
+									//넘겨주는 정보가 1개이므로 true : auto commit
+		sqlSession.delete("boardMapper.delete", no);
+		sqlSession.close();		
+	}
+
+	public void update(BoardDto boardDto) {
+		SqlSession sqlSession = sqlSessionFactory.openSession(true); 
+		sqlSession.update("boardMapper.update", boardDto);
+		sqlSession.close();	
 	}
 
 }

@@ -3,13 +3,35 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="boardMapper">
+
  <select id="list" resultType="com.the.dto.BoardDto">
  	SELECT * FROM board ORDER BY no DESC
  </select>
  
  <!-- 생략가능 parameterType="com.the.dto.BoardDto" . dto 필드명을 입력 -->
- <insert id="save" >
- 	INSERT INTO board (no, subject, content, writer, created_date)
- 	VALUES(seq_board.nextval, #{subject}, #{content}, 'guest', sysdate)
+ <insert id="save">
+ 	INSERT
+ 		INTO board (no, subject, content, writer, created_date)
+ 		VALUES(seq_board.nextval, #{subject}, #{content}, 'guest', sysdate)
  </insert>
+ 
+  <select id="detail" resultType="com.the.dto.BoardDto">
+ 	SELECT * FROM board WHERE no=#{no}
+  </select>
+ 
+  <delete id="delete" >
+ 	DELETE FROM board WHERE no=#{no}
+  </delete>
+  
+ <update id="update" >
+  	UPDATE board
+  		SET subject=#{subject}, content=#{content}
+  		WHERE no=#{no} 
+ </update>
+  
+  <update id="count">
+  	UPDATE board
+  		SET read_count = read_count+1
+  		WHERE no=#{no}
+  </update>
 </mapper>
