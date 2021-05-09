@@ -9,6 +9,6 @@
 </head>
 <body>
 	<jsp:include page="/common/menu.jsp"/>
-	<h1>인덱스 페이지</h1>
+	<h1>INDEX 페이지</h1>
 </body>
 </html>
