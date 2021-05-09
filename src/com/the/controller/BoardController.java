@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.the.service.BoardDetailService;
 import com.the.service.BoardListService;
 import com.the.service.BoardService;
+import com.the.service.BoardWritePageService;
 import com.the.service.BoardWriteService;
 
 
@@ -30,7 +32,11 @@ public class BoardController extends HttpServlet {
 		if(key.equals("list")) {
 			boardService = new BoardListService();
 		} else if(key.equals("write-page")) {
+			boardService = new BoardWritePageService();
+		} else if(key.equals("write")) {
 			boardService = new BoardWriteService();
+		} else if(key.equals("detail")) {
+			boardService = new BoardDetailService();
 		}
 		
 		//서비스 실행
@@ -40,6 +46,7 @@ public class BoardController extends HttpServlet {
 	
 		//view
 		if(path != null) {
+			System.out.println("jsp로 이동...");
 			request.getRequestDispatcher(path).forward(request, response);
 		}
 	

@@ -5,12 +5,13 @@ import java.sql.Timestamp;
 public class BoardDto {
 	private long no;
 	private String subject;
-	private String contents;
+	private String content;
 	private int read_count;
 	private String writer;
 	private Timestamp created_date;
 	
 	public long getNo() {
+		System.out.println("getNo() 실행");
 		return no;
 	}
 	public void setNo(long no) {
@@ -22,11 +23,11 @@ public class BoardDto {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
-	public String getContents() {
-		return contents;
+	public String getContent() {
+		return content;
 	}
-	public void setContents(String contents) {
-		this.contents = contents;
+	public void setContent(String content) {
+		this.content = content;
 	}
 	public int getRead_count() {
 		return read_count;

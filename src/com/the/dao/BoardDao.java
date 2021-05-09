@@ -22,6 +22,23 @@ public class BoardDao {
 		
 		
 		sqlSession.close();
+		return result;
+	}
+
+	public int save(BoardDto boardDto) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		//삽입한 data의 row 수를 리턴해준다.
+		int result = sqlSession.insert("boardMapper.save", boardDto);
+		
+		sqlSession.commit();
+		sqlSession.close();
+		
+		return 0;
+	}
+
+	public BoardDto detail(long no) {
+		
 		return null;
 	}
 
