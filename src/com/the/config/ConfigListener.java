@@ -18,11 +18,9 @@ import com.the.service.BoardService;
 @WebListener
 public class ConfigListener implements ServletContextListener {
 
-
-    @SuppressWarnings("deprecation")
 	public void contextInitialized(ServletContextEvent sce)  { 
          System.out.println("서버 시작 시 실행되는 메서드...");
-         ServletContext sc = sce.getServletContext(); //어플리케이션 컨텍스트 객체
+         ServletContext servletContext = sce.getServletContext(); //어플리케이션 컨텍스트 객체
          
          //mybatis인 경우 Resources 객체 제공
          String resource = "/com/the/service/serviceConfig.properties";
@@ -51,7 +49,7 @@ public class ConfigListener implements ServletContextListener {
 				BoardService boardService = (BoardService)clazz.getDeclaredConstructor().newInstance(); //오브젝트로 인스턴스화
 				serviceMap.put(key, boardService);
 			}//for END
-			
+			servletContext.setAttribute("serviceMap", serviceMap); //서블릿 끝날 때까지 적용 가능
 			
 			
 		} catch (Exception e) {
